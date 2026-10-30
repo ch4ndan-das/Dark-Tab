@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  body { width: 270px; font-family: system-ui, sans-serif; background: #1e1e2e; color: #eee; margin: 0; padding: 14px; }
+  h1 { font-size: 15px; margin: 0 0 10px; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 12px; }
+  .tab { flex: 1; background: #2a2a3c; color: #eee; border: 0; border-radius: 8px; padding: 7px; cursor: pointer; font-size: 12px; }
+  .tab.active { background: #7c5cff; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .row { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: #2a2a3c; border-radius: 10px; margin-bottom: 10px; font-size: 13px; }
+  .col { flex-direction: column; align-items: stretch; gap: 8px; }
+  .col label { display: flex; justify-content: space-between; }
+  .col input[type=range] { width: 100%; accent-color: #7c5cff; }
+  .switch { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; inset: 0; background: #555; border-radius: 22px; cursor: pointer; transition: .2s; }
+  .slider::before { content: ""; position: absolute; width: 16px; height: 16px; border-radius: 50%; left: 3px; top: 3px; background: #fff; transition: .2s; }
+  input:checked + .slider { background: #7c5cff; }
+  input:checked + .slider::before { transform: translateX(18px); }
+  #reset { background: #3a3a50; color: #eee; border: 0; border-radius: 8px; padding: 6px; cursor: pointer; font-size: 12px; }
+  #reset:hover { background: #4a4a66; }
+  #status { font-size: 12px; opacity: .75; text-align: center; margin-top: 4px; }
+  .hint { font-size: 11px; opacity: .45; margin-top: 8px; text-align: center; }
+</style>
+</head>
+<body>
+  <h1>Dark Tab</h1>
+
+  <div class="tabs">
+    <button class="tab active" data-panel="main">Main</button>
+    <button class="tab" data-panel="color">Color</button>
+  </div>
+
+  <div class="panel active" id="main">
+    <div class="row">
+      <span>Dark mode</span>
+      <label class="switch"><input type="checkbox" id="globalToggle" /><span class="slider"></span></label>
+    </div>
+    <div class="row">
+      <span>Exclude this site<br /><small id="siteName" style="opacity:.6"></small></span>
+      <label class="switch"><input type="checkbox" id="siteToggle" /><span class="slider"></span></label>
+    </div>
+  </div>
+
+  <div class="panel" id="color">
+    <div class="row col">
+      <label>Brightness <small id="bVal"></small></label>
+      <input type="range" id="brightness" min="60" max="110" />
+      <label>Contrast <small id="cVal"></small></label>
+      <input type="range" id="contrast" min="70" max="130" />
+      <button id="reset">Reset balance</button>
+    </div>
+  </div>
+
+  <div id="status">...</div>
+  <div class="hint">Shortcut: Alt + Shift + D</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

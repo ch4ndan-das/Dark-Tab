@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Dark Tab",
+  "version": "1.2.0",
+  "description": "One-click dark mode for every tab. Skips sites that are already dark.",
+  "permissions": ["storage", "activeTab"],
+  "icons": { "16": "icon128.png", "48": "icon128.png", "128": "icon128.png" },
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    { "matches": ["<all_urls>"], "js": ["content.js"], "run_at": "document_start" }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Dark Tab",
+    "default_icon": { "16": "icon128.png", "48": "icon128.png", "128": "icon128.png" }
+  },
+  "commands": {
+    "toggle-dark-mode": {
+      "suggested_key": { "default": "Alt+Shift+D" },
+      "description": "Toggle dark mode"
+    }
+  }
+}
